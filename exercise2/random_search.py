@@ -22,7 +22,6 @@ class MyWorker(Worker):
     def compute(self, config, budget, **kwargs):
         """
         Evaluates the configuration on the defined budget and returns the validation performance.
-
         Args:
             config: dictionary containing the sampled configurations by the optimizer
             budget: (float) amount of time/epochs/etc. the model can use to train
@@ -34,6 +33,8 @@ class MyWorker(Worker):
         lr = config["learning_rate"]
         num_filters = config["num_filters"]
         batch_size = config["batch_size"]
+        filter_size = config["filter_size"]
+
         epochs = budget
 
         # TODO: train and validate your convolutional neural networks here
