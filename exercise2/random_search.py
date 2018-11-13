@@ -61,8 +61,6 @@ class MyWorker(Worker):
             'learning_rate', lower=10e-4, upper=1, log=True))
         config_space.add_hyperparameter(CS.UniformIntegerHyperparameter(
             'batch_size', lower=16, upper=128, log=True))
-        config_space.add_hyperparameter(CS.UniformIntegerHyperparameter(
-            'num_filters', lower=8, upper=64, log=True))
         config_space.add_hyperparameter(CS.CategoricalHyperparameter(
             'filter_size', [3, 5]))
         return config_space
@@ -131,14 +129,3 @@ learning_rate = id2config[incumbent]['config']['learning_rate']
 batch_size = id2config[incumbent]['config']['batch_size']
 filter_size = id2config[incumbent]['config']['filter_size']
 num_filters = id2config[incumbent]['config']['num_filters']
-
-
-# load data
-x_train, y_train, x_valid, y_valid, x_test, y_test = mnist('../exercise1/data')
-
-# train optimized model
-learning_curve, model, _ = train_and_validate(x_train, y_train, x_valid, y_valid,
-                                           12, learning_rate, num_filters,
-                                           batch_size, filter_size)
-
-test_err = test(x_test, y_test, model)
